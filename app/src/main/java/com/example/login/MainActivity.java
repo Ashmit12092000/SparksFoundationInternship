@@ -1,7 +1,7 @@
 package com.example.login;
 
 import android.content.Intent;
-//import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         facebookName = (TextView) findViewById(R.id.txtUsername);
         g_login=findViewById(R.id.g_button);
         mAuth=FirebaseAuth.getInstance();
-        //gender = (TextView)findViewById(R.id.gender);
+       
         pbar=findViewById(R.id.pbar);
         profilePictureView = (ProfilePictureView) findViewById(R.id.image);
         infoLayout = findViewById(R.id.infolayout);
@@ -60,15 +60,7 @@ public class MainActivity extends AppCompatActivity {
         btnLogin.setReadPermissions(Arrays.asList("public_profile, email, user_birthday"));
         mcallbackManager = CallbackManager.Factory.create();
 
-     /*   btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LoginManager.getInstance().logOut();
-                infoLayout.setVisibility(View.GONE);
-                finish();
-            }
-        });*/
-        // Callback registration
+  
         btnLogin.registerCallback(mcallbackManager, new FacebookCallback<LoginResult>() {
 
             @Override
@@ -179,11 +171,11 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
+                            
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                         } else {
-                            // If sign in fails, display a message to the user.
+                          
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
                             Toast.makeText(MainActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
@@ -211,8 +203,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
+      
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        //updateUI(currentUser);
+       currentUser.reload();
     }
 }
